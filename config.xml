@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.helloworld" version="1.0.0">
   <name>HelloWorld</name>
   <description>Hello World sample application that responds to the deviceready event.</description>
@@ -110,3 +111,4 @@
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
   </platform>
+</widget>
