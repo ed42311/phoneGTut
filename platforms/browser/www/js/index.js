@@ -1,24 +1,36 @@
 var app = {
 
-    initialize: function() {
-        var self = this;
-        this.homeTpl = Handlebars.compile($("#home-tpl").html());
-        this.employeeLiTpl = Handlebars.compile($("#employee-li-tpl").html());
-        this.store = new MemoryStore(function () {
-            self.renderHomeView();
-        });
+    registerEvents: function() {
+        $(window).on('hashchange', $.proxy(this.route, this));
+        if (document.documentElement.hasOwnProperty('ontouchstart')) {
+            $('body').on('touchstart', 'a', function(event) {
+                $(event.target).addClass('tappable-active');
+            });
+            $('body').on('touchend', 'a', function(event) {
+                $(event.target).removeClass('tappable-active');
+            });
+        } else {
+            $('body').on('mousedown', 'a', function(event) {
+                $(event.target).addClass('tappable-active');
+            });
+            $('body').on('mouseup', 'a', function(event) {
+                $(event.target).removeClass('tappable-active');
+            });
+        }
     },
 
-    findByName: function() {
-        var self = this;
-        this.store.findByName($('.search-key').val(), function(employees) {
-            $('.employee-list').html(self.employeeLiTpl(employees));
-        });
-    },
-
-    renderHomeView: function() {
-        $('body').html(this.homeTpl());
-        $('.search-key').on('keyup', $.proxy(this.findByName, this));
+    route: function() {
+        var hash = window.location.hash;
+        if (!hash) {
+            $('body').html(new HomeView(this.store).render().el);
+            return;
+        } 
+        var match = hash.match(app.detailsURL);
+        if (match) {
+            this.store.findById(Number(match[1]), function(employee) {
+                $('body').html(new EmployeeView(employee).render().el);
+            });
+        }
     },
 
     showAlert: function (message, title) {
@@ -27,5 +39,15 @@ var app = {
         } else {
             alert(title ? (title + ": " + message) : message);
         }
+    },
+
+    initialize: function() {
+        var self = this;
+        this.detailsURL = /^#employees\/(\d{1,})/;
+        this.registerEvents();
+        this.store = new MemoryStore(function() {
+            self.route();
+        });
+        
     }
 };
