@@ -128,7 +128,9 @@ body {
     box-flex: 1;
 }
 
-
+.header .contact-header {
+    top-margin: 20%;
+}
 
 input[type="search"] {
     width:100%;
