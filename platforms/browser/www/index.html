@@ -25,13 +25,14 @@
 </head>
 
 <body>
-      
     <script id="home-tpl" type="text/x-handlebars-template">
         <div class="app">  
             <div class="header"><h1>Search Contacts</h1></div>
-            <div class="search-bar"><input class='search-key' type="search"/>
+            <div class="search-bar"><input class="search-key" type="search"/>
             </div>
-            <div class="scroll"><ul class='employee-list'></ul></div>
+            <div class="scroll"><ul class="employee-list"></ul></div>
+            <button id="another-button">this is a button</button>
+            <div class="another-div"></div>
         </div>
     </script>
     <script id="employee-li-tpl" type="text/x-handlebars-template"> 
@@ -45,13 +46,18 @@
             <img class="employee-image" src="img/{{firstName}}_{{lastName}}.jpg"/>
             <h1>{{firstName}} {{lastName}}</h1>
             <h2>{{title}}</h2>
-            <span class="loaction"></span>
+            <span class="location"></span>
             <ul>
                 <li><a href="tel:{{officePhone}}">Call Office<br/>{{officePhone}}</a><button class="button">Edit</button></li>
                 <li><a href="tel:{{cellPhone}}">Call Mobile<br/>{{cellPhone}}</a><button class="button">Edit</button></li>
                 <li><a href="tel:{{cellPhone}}">SMS<br/>{{cellPhone}}</a><button class="button">Edit</button></li>
             </ul>
         </div>
+    </script>
+    <script id="another-tpl" type="text/x-handlebars-template">
+    {{#.}}
+    <h1>Completed Test</h1>
+    {{/.}}
     </script>
 
     <script type="text/javascript" src="cordova.js"></script>

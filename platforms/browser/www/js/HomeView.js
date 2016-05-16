@@ -3,10 +3,16 @@ var HomeView = function(store) {
   this.initialize = function() {
     this.el = $('<div/>');
     this.el.on('keyup', '.search-key', this.findByName);
+    this.el.on('click', '#another-button', this.anotherRender);
   };
 
   this.render = function() {
     this.el.html(HomeView.template());
+    return this;
+  };
+
+  this.anotherRender = function() {
+    $('.another-div').html(HomeView.anotherTemplate());
     return this;
   };
 
@@ -29,4 +35,5 @@ var HomeView = function(store) {
 
 HomeView.template = Handlebars.compile($("#home-tpl").html());
 HomeView.liTemplate = Handlebars.compile($("#employee-li-tpl").html());
+HomeView.anotherTemplate = Handlebars.compile($("#another-tpl").html());
 
